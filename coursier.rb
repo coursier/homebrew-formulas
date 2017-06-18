@@ -2,7 +2,7 @@ class Coursier < Formula
   desc "Coursier launcher."
   homepage "http://get-coursier.io"
   url "https://repo1.maven.org/maven2/io/get-coursier/coursier-cli_2.11/1.0.0-RC4/coursier-cli_2.11-1.0.0-RC4-standalone.jar", :using => :nounzip
-  sha1 "332c97f6a0088d2d6ddad3087c88e103c417f9c1"
+  sha256 "c2d928aea74d5d918ed333bcf0bdeeced90b5112e86d088585ff59513b926ed9"
   version "1.0.0-RC4"
 
   bottle :unneeded
