@@ -11,6 +11,8 @@ class Coursier < Formula
 
   def install
     bin.install 'coursier'
+    
+    zsh_completion.install "scripts/_coursier"
   end
 
   test do
