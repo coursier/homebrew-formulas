@@ -13,10 +13,6 @@ class Coursier < Formula
   depends_on :java => "1.8+"
 
   def install
-    FileUtils.mkdir_p "completions/zsh"
-    system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
-    zsh_completion.install "completions/zsh/_coursier"
-
     bin.install 'coursier'
   end
 
