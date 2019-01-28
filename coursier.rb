@@ -4,8 +4,9 @@ require 'formula'
 
 class Coursier < Formula
   desc "Coursier launcher."
-  homepage "http://get-coursier.io"
-  head 'git://github.com/alexarchambault/coursier.git'
+  homepage "https://get-coursier.io"
+  head 'git://github.com/coursier/coursier.git'
+  bottle :unneeded
 
   depends_on :java => "1.8+"
 
@@ -17,7 +18,7 @@ class Coursier < Formula
 
   test do
     ENV["COURSIER_CACHE"] = "#{testpath}/cache"
-    output = shell_output("#{bin}/coursier launch io.get-coursier:echo:1.0.0-RC10 -- foo")
+    output = shell_output("#{bin}/coursier launch io.get-coursier:echo:1.0.2 -- foo")
     assert_equal ["foo\n"], output.lines
   end
 end
