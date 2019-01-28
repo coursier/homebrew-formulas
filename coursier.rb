@@ -5,15 +5,19 @@ require 'formula'
 class Coursier < Formula
   desc "Coursier launcher."
   homepage "https://get-coursier.io"
-  head 'git://github.com/coursier/coursier.git'
+  version "1.1.0-M10"
+  url "https://github.com/coursier/coursier/releases/download/v1.1.0-M10/coursier"
+  sha256 "c303952387f3c9117ca7c5a5042c1f491784a8d7d83f7a7f93f36e56dd9dcbce"
   bottle :unneeded
 
   depends_on :java => "1.8+"
 
   def install
+    FileUtils.mkdir_p "completions/zsh"
+    system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
+    zsh_completion.install "completions/zsh/_coursier"
+
     bin.install 'coursier'
-    
-    zsh_completion.install "scripts/_coursier"
   end
 
   test do
