@@ -5,9 +5,9 @@ require 'formula'
 class Coursier < Formula
   desc "Coursier launcher."
   homepage "https://get-coursier.io"
-  version "1.1.0-M11"
-  url "https://github.com/coursier/coursier/releases/download/v1.1.0-M11/coursier"
-  sha256 "deaa87f3e58762f4f4b474425b4a1907bdbf13f470f7888fb69e4caf689747c9"
+  version "1.1.0-M11-2"
+  url "https://github.com/coursier/coursier/releases/download/v1.1.0-M11-2/coursier"
+  sha256 "197bec196272098b84f5ecaba03836103252f37278758aafde9e7a67d33ad284"
   bottle :unneeded
 
   depends_on :java => "1.8+"
