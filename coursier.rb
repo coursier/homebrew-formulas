@@ -5,21 +5,17 @@ require 'formula'
 class Coursier < Formula
   desc "Coursier launcher."
   homepage "https://get-coursier.io"
-  version "2.0.0-RC3-1"
-  url "https://github.com/coursier/coursier/releases/download/v2.0.0-RC3-1/coursier"
-  sha256 "f2bc6628573515596482a78784015ffcccebf8c6732156ab72711fddd795162a"
+  version "2.0.0-RC3-2"
+  url "https://github.com/coursier/coursier/releases/download/v2.0.0-RC3-2/coursier"
+  sha256 "1a747eded72450d93977e1472a99b8e91bea1539367d67cdc00fe79c4d2b581a"
   bottle :unneeded
-
-  option "without-zsh-completions", "Disable zsh completion installation"
 
   depends_on :java => "1.8+"
 
   def install
-    unless build.without? "zsh-completion"
-      FileUtils.mkdir_p "completions/zsh"
-      system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
-      zsh_completion.install "completions/zsh/_coursier"
-    end
+    FileUtils.mkdir_p "completions/zsh"
+    system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
+    zsh_completion.install "completions/zsh/_coursier"
 
     bin.install 'coursier'
   end
