@@ -10,12 +10,16 @@ class Coursier < Formula
   sha256 "f2bc6628573515596482a78784015ffcccebf8c6732156ab72711fddd795162a"
   bottle :unneeded
 
+  option "without-zsh-completions", "Disable zsh completion installation"
+
   depends_on :java => "1.8+"
 
   def install
-    FileUtils.mkdir_p "completions/zsh"
-    system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
-    zsh_completion.install "completions/zsh/_coursier"
+    unless build.without? "zsh-completion"
+      FileUtils.mkdir_p "completions/zsh"
+      system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
+      zsh_completion.install "completions/zsh/_coursier"
+    end
 
     bin.install 'coursier'
   end
