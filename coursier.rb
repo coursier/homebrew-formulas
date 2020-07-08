@@ -5,15 +5,15 @@ require 'formula'
 class Coursier < Formula
   desc "Coursier launcher."
   homepage "https://get-coursier.io"
-  version "2.0.0-RC6-21"
-  url "https://github.com/coursier/coursier/releases/download/v2.0.0-RC6-21/cs-x86_64-apple-darwin"
-  sha256 "dcce55dd06b0457b814e150700300418ffa3b978da78bb82c213a08c0ee59b49"
+  version "2.0.0-RC6-22"
+  url "https://github.com/coursier/coursier/releases/download/v2.0.0-RC6-22/cs-x86_64-apple-darwin"
+  sha256 "77b7e942796a4dc3d244769c2d03b89ecb64fbe2e45055fd057f6ee2e078b69b"
   bottle :unneeded
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.0.0-RC6-21/coursier"
-    sha256 "8e1ac9cfad418b8784c11e9d7e3253f4d81be7e9189485891d57204170737f20"
+    url "https://github.com/coursier/coursier/releases/download/v2.0.0-RC6-22/coursier"
+    sha256 "6d470689f62755e2ca99e09b8088fbbad4d184a250e787ad5c3e15bac2b83b98"
   end
 
   option "without-zsh-completions", "Disable zsh completion installation"
@@ -21,14 +21,14 @@ class Coursier < Formula
   depends_on :java => "1.8+"
 
   def install
-    unless build.without? "zsh-completion"
-      FileUtils.mkdir_p "completions/zsh"
-      system "bash", "-c", "bash ./coursier --completions zsh > completions/zsh/_coursier"
-      zsh_completion.install "completions/zsh/_coursier"
-    end
-
     bin.install 'cs-x86_64-apple-darwin' => "cs"
     resource("jar-launcher").stage { bin.install "coursier" }
+
+    unless build.without? "zsh-completions"
+      chmod 0555, bin/"coursier"
+      output = Utils.popen_read("#{bin}/coursier --completions zsh")
+      (zsh_completion/"_coursier").write output
+    end
   end
 
   test do
