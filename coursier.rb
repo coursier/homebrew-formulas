@@ -5,15 +5,15 @@ require 'formula'
 class Coursier < Formula
   desc "Coursier launcher."
   homepage "https://get-coursier.io"
-  version "2.0.5"
-  url "https://github.com/coursier/coursier/releases/download/v2.0.5/cs-x86_64-apple-darwin"
-  sha256 "89a2ed25a42073c5d9425623fec7b09b1edbcdf7c2fdf8080d0dffcf0e85297a"
+  version "2.0.6"
+  url "https://github.com/coursier/coursier/releases/download/v2.0.6/cs-x86_64-apple-darwin"
+  sha256 "236a4b1a7b05e2ad0152da6a7597bcef48bad98f3c70e896f3047836bad9c9aa"
   bottle :unneeded
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.0.5/coursier"
-    sha256 "62c9f228ff8b40bbedcaed8f20af3a2bcf9e5d1cb82c39767eae8a88f825c1c8"
+    url "https://github.com/coursier/coursier/releases/download/v2.0.6/coursier"
+    sha256 "32728210563ad8b1f5f2ba836bdcef9fe7f465dd219ec3dc07b72842e23ae07d"
   end
 
   option "without-zsh-completions", "Disable zsh completion installation"
