@@ -18,7 +18,8 @@ class Coursier < Formula
 
   option "without-zsh-completions", "Disable zsh completion installation"
 
-  depends_on :java => "1.8+"
+  depends_on java: "1.8+" if MacOS.version < :big_sur
+  depends_on "openjdk" if MacOS.version >= :big_sur
 
   def install
     bin.install 'cs-x86_64-apple-darwin' => "cs"
