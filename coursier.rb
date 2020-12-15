@@ -15,8 +15,7 @@ class Coursier < Formula
     sha256 "d3ba37e53d9cfa778af481c7099cd1dc485242283e9d2c5c2753f3859908cbd4"
   end
 
-  depends_on java: "1.8+" if MacOS.version < :catalina
-  depends_on "openjdk" if MacOS.version >= :catalina
+  depends_on "java" if MacOS.version < :catalina
 
   def install
     bin.install "cs-x86_64-apple-darwin" => "cs"
