@@ -2,8 +2,8 @@
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  url "https://github.com/coursier/coursier/releases/download/v2.0.13/cs-x86_64-apple-darwin"
-  version "2.0.13"
+  url "https://github.com/coursier/coursier/releases/download/v2.0.16/cs-x86_64-apple-darwin"
+  version "2.0.16"
   sha256 "d74b8fe4ffc2f4e9011d7151722fc8b5ffca8a72b3bc4188c61df3326228c4ef"
   bottle :unneeded
 
@@ -11,7 +11,7 @@ class Coursier < Formula
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.0.13/coursier"
+    url "https://github.com/coursier/coursier/releases/download/v2.0.16/coursier"
     sha256 "dc576fa121ffe8c64ae8a108997b05b5e682a132ced2e9cae9da7bb7eb2756de"
   end
 
