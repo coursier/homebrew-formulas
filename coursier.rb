@@ -2,21 +2,20 @@
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  url "https://github.com/coursier/coursier/releases/download/v2.0.13/cs-x86_64-apple-darwin"
-  version "2.0.13"
-  sha256 "d74b8fe4ffc2f4e9011d7151722fc8b5ffca8a72b3bc4188c61df3326228c4ef"
+  url "https://github.com/coursier/coursier/releases/download/v2.0.16-169-g194ebc55c/cs-x86_64-apple-darwin.gz"
+  version "2.0.16-169-g194ebc55c"
+  sha256 "15bce235d223ef1d022da30b67b4c64e9228d236b876c834b64e029bbe824c6f"
   bottle :unneeded
 
   option "without-zsh-completions", "Disable zsh completion installation"
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.0.13/coursier"
-    sha256 "dc576fa121ffe8c64ae8a108997b05b5e682a132ced2e9cae9da7bb7eb2756de"
+    url "https://github.com/coursier/coursier/releases/download/v2.0.16-169-g194ebc55c/coursier"
+    sha256 "7f51548700ee2b296f2a8b204e2d6fc65bb6f1d7fad34887959af92514308b56"
   end
 
-  depends_on java: "1.8+" if MacOS.version < :catalina
-  depends_on "openjdk" if MacOS.version >= :catalina
+  depends_on "openjdk"
 
   def install
     bin.install "cs-x86_64-apple-darwin" => "cs"
@@ -24,7 +23,7 @@ class Coursier < Formula
 
     unless build.without? "zsh-completions"
       chmod 0555, bin/"coursier"
-      output = Utils.safe_popen_read("#{bin}/coursier --completions zsh")
+      output = Utils.safe_popen_read("#{bin}/coursier", "--completions", "zsh")
       (zsh_completion/"_coursier").write output
     end
   end
