@@ -5,7 +5,6 @@ class Coursier < Formula
   url "https://github.com/coursier/coursier/releases/download/v2.0.16-169-g194ebc55c/cs-x86_64-apple-darwin.gz"
   version "2.0.16-169-g194ebc55c"
   sha256 "15bce235d223ef1d022da30b67b4c64e9228d236b876c834b64e029bbe824c6f"
-  bottle :unneeded
 
   option "without-zsh-completions", "Disable zsh completion installation"
 
