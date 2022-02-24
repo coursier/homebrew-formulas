@@ -21,9 +21,11 @@ class Coursier < Formula
     resource("jar-launcher").stage { bin.install "coursier" }
 
     unless build.without? "zsh-completions"
-      chmod 0555, bin/"coursier"
-      output = Utils.safe_popen_read("#{bin}/coursier", "--completions", "zsh")
-      (zsh_completion/"_coursier").write output
+      with_env("COURSIER_MIRRORS": ENV["HOMEBREW_COURSIER_MIRRORS"]) do
+        chmod 0555, bin/"coursier"
+        output = Utils.safe_popen_read("#{bin}/coursier", "--completions", "zsh")
+        (zsh_completion/"_coursier").write output
+      end
     end
   end
 
