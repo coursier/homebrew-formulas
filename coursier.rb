@@ -2,16 +2,16 @@
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  url "https://github.com/coursier/coursier/releases/download/v2.1.3/cs-x86_64-apple-darwin.gz"
-  version "2.1.3"
-  sha256 "ccbde485d1f53a297c5c159f3975df24b19f1e966ec88faa266cc0e3856972e1"
+  url "https://github.com/coursier/coursier/releases/download/v2.1.4/cs-x86_64-apple-darwin.gz"
+  version "2.1.4"
+  sha256 "f766fe12eba50cf23f23975818ce6505b05660fec9856b4573aaa0645e1737ca"
 
   option "without-shell-completions", "Disable shell completion installation"
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.3/coursier"
-    sha256 "2bb33d429a7b59a96c47bac11994dc6a04a7852a478efa8da3021e6b74076e8c"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.4/coursier"
+    sha256 "8bfcff22e4b1bcb0c127d4191ae228ddbdc8645cbf279e6611b65fb56c859f3f"
   end
 
   depends_on "openjdk"
