@@ -4,7 +4,7 @@ class Coursier < Formula
   homepage "https://get-coursier.io"
   version "2.1.7"
   on_intel do
-    url "https:a//github.com/coursier/coursier/releases/download/v2.1.7/cs-x86_64-apple-darwin.gz"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.7/cs-x86_64-apple-darwin.gz"
     sha256 "db49faf31b5ef824394530c4ba6b1d584604e98a546502b15b8a6f0488e78d26"
   end
   on_arm do
