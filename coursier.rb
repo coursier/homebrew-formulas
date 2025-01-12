@@ -2,29 +2,39 @@
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  url "https://github.com/coursier/coursier/releases/download/v2.0.16-200-ge888c6dea/cs-x86_64-apple-darwin.gz"
-  version "2.0.16-200-ge888c6dea"
-  sha256 "b0f51173dade24d9b6b151ddc015fdd70e3dcf9200d7b2bb9209a834b401f799"
+  version "2.1.24"
+  on_intel do
+    url "https://github.com/coursier/coursier/releases/download/v2.1.24/cs-x86_64-apple-darwin.gz"
+    sha256 "33913cd6b61658035d9e6fe971e919cb0ef1f659aa7bff7deeded963a2d36385"
+  end
+  on_arm do
+    url "https://github.com/coursier/coursier/releases/download/v2.1.24/cs-aarch64-apple-darwin.gz"
+    sha256 "53a5728c2016118c8296fa7d5678ddfe122e22dc6c36deb554d771b3b9295b4f"
+  end
 
-  option "without-zsh-completions", "Disable zsh completion installation"
+  option "without-shell-completions", "Disable shell completion installation"
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.0.16-200-ge888c6dea/coursier"
-    sha256 "055cde186eda17b2f3766f1339a8a03efbbfff366648afacc7375ba705649086"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.24/coursier"
+    sha256 "7aa975f12469726d6bb87852107afe0b8d6f3c82b12a49ef43cc6647c4e057ca"
   end
 
   depends_on "openjdk"
 
   def install
-    bin.install "cs-x86_64-apple-darwin" => "cs"
+    on_intel do
+      bin.install "cs-x86_64-apple-darwin" => "cs"
+    end
+    on_arm do
+      bin.install "cs-aarch64-apple-darwin" => "cs"
+    end
     resource("jar-launcher").stage { bin.install "coursier" }
 
-    unless build.without? "zsh-completions"
+    unless build.without? "shell-completions"
       with_env("COURSIER_MIRRORS": ENV["HOMEBREW_COURSIER_MIRRORS"]) do
         chmod 0555, bin/"coursier"
-        output = Utils.safe_popen_read("#{bin}/coursier", "--completions", "zsh")
-        (zsh_completion/"_coursier").write output
+        generate_completions_from_executable(bin/"coursier", "completions", shells: [:bash, :zsh])
       end
     end
   end
