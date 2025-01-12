@@ -8,7 +8,7 @@ class Coursier < Formula
     sha256 "db49faf31b5ef824394530c4ba6b1d584604e98a546502b15b8a6f0488e78d26"
   end
   on_arm do
-    url "https://github.com/VirtusLab/coursier-m1/releases/download/v2.1.7/cs-aarch64-apple-darwin.gz"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.7/cs-aarch64-apple-darwin.gz"
     sha256 "4da2fa206735017b31ff143e7ad1d23f695a8dc41361e9dd42f4a69136197742"
   end
 
