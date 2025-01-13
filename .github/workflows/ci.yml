@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  macos_build:
+    name: MacOS 
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [macos-13, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - run: brew install ./coursier.rb && brew test cs
