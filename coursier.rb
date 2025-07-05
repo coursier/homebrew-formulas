@@ -2,13 +2,13 @@
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  version "2.1.25-M14"
+  version "2.1.25-M15"
   on_intel do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M14/cs-x86_64-apple-darwin.gz"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M15/cs-x86_64-apple-darwin.gz"
     sha256 ""
   end
   on_arm do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M14/cs-aarch64-apple-darwin.gz"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M15/cs-aarch64-apple-darwin.gz"
     sha256 ""
   end
 
@@ -16,8 +16,8 @@ class Coursier < Formula
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M14/coursier"
-    sha256 "d98cebc6b868af6484c99633e97fe841fd48045b422ce63d4a1d7c60575fa510"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M15/coursier"
+    sha256 "423cbd2417c5e917d681a9f1df94703da1309697b2f46c2e629dd4156b061437"
   end
 
   depends_on "openjdk"
