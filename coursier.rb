@@ -1,23 +1,26 @@
+# This file is generated from https://github.com/coursier/coursier/blob/main/.github/scripts/coursier.rb.template
+# DO NOT EDIT MANUALLY
+
 # adapted from https://github.com/paulp/homebrew-extras/blob/8184f9a962ce0758f4cf7a07b702bc1c3d16dfaa/coursier.rb
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  version "2.1.25-M15"
+  version "2.1.25-M16"
   on_intel do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M15/cs-x86_64-apple-darwin.gz"
-    sha256 ""
+    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M16/cs-x86_64-apple-darwin.gz"
+    sha256 "1df65ffc5a659cb5a241ce2a31dd6671d5596af0d260239ab7039d59fbf0e46b"
   end
   on_arm do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M15/cs-aarch64-apple-darwin.gz"
-    sha256 ""
+    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M16/cs-aarch64-apple-darwin.gz"
+    sha256 "bb86be2337fa7e58d1908307777899d01b36535c8a3e32a6d6be05e6865b48ad"
   end
 
   option "without-shell-completions", "Disable shell completion installation"
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M15/coursier"
-    sha256 "423cbd2417c5e917d681a9f1df94703da1309697b2f46c2e629dd4156b061437"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.25-M16/coursier"
+    sha256 "4a4204244ae18978ffaa32708a43df5523ce0edc35f1015224afee18811efabd"
   end
 
   depends_on "openjdk"
