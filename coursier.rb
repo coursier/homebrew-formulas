@@ -35,8 +35,10 @@ class Coursier < Formula
     resource("jar-launcher").stage { bin.install "coursier" }
 
     unless build.without? "shell-completions"
-      chmod 0555, bin/"coursier"
-      generate_completions_from_executable(bin/"coursier", "completions", shells: [:bash, :zsh])
+      with_env("COURSIER_MIRRORS": ENV["HOMEBREW_COURSIER_MIRRORS"]) do
+        chmod 0555, bin/"coursier"
+        generate_completions_from_executable(bin/"coursier", "completions", shells: [:bash, :zsh])
+      end
     end
   end
 
