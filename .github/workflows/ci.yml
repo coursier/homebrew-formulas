@@ -7,14 +7,13 @@ on:
 jobs:
   macos_build:
     name: MacOS
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [macos-13, macos-14]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - run: brew install ./coursier.rb && brew test coursier
+      - run: |
+          brew tap coursier/formulas .
+          brew install coursier
+          brew test coursier
