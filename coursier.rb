@@ -5,25 +5,28 @@
 class Coursier < Formula
   desc "Launcher for Coursier"
   homepage "https://get-coursier.io"
-  version "2.1.25"
+  version "2.1.26"
   on_intel do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25/cs-x86_64-apple-darwin.gz"
-    sha256 "99e59ed3222a85d4d9ba64df890770b21bf37a3f0dfc039b99028c18f3322c9a"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.26/cs-x86_64-apple-darwin.gz"
+    sha256 "c8045f36fadec075c8647b979d1028435935b0ecd43efa1387cd286c3926a421"
   end
   on_arm do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25/cs-aarch64-apple-darwin.gz"
-    sha256 "43a485b1bc5c8d13a4614b5a59211b6612d62b38b9b4166d6bddbdefb4ace4de"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.26/cs-aarch64-apple-darwin.gz"
+    sha256 "8e4d36aa2565276f262af073f0999399e4c2f920f2fe436bb0ae67665eb505e9"
   end
 
   option "without-shell-completions", "Disable shell completion installation"
 
   # https://stackoverflow.com/questions/10665072/homebrew-formula-download-two-url-packages/26744954#26744954
   resource "jar-launcher" do
-    url "https://github.com/coursier/coursier/releases/download/v2.1.25/coursier"
-    sha256 "8be36418507c94f652a8631a8f79712b4a88f99c974fdb0046c911a7d131e719"
+    url "https://github.com/coursier/coursier/releases/download/v2.1.26/coursier"
+    sha256 "eb0c35379e76f44404f777ab0a2335ca5326f6b7721b8cdfa873e87bd9f4ac0c"
   end
 
-  depends_on "openjdk"
+  # No dependency on openjdk: its java would end up on the PATH, shadowing the JVMs
+  # that coursier manages (https://github.com/coursier/coursier/issues/3763).
+  # The native launcher "cs" doesn't need a JVM. The JAR-based launcher "coursier" uses the
+  # JVM from JAVA_HOME or the PATH, such as the one "cs setup" installs.
 
   def install
     on_intel do
@@ -33,10 +36,13 @@ class Coursier < Formula
       bin.install "cs-aarch64-apple-darwin" => "cs"
     end
     resource("jar-launcher").stage { bin.install "coursier" }
+    chmod 0555, bin/"coursier"
 
     unless build.without? "shell-completions"
-      chmod 0555, bin/"coursier"
-      generate_completions_from_executable(bin/"coursier", "completions", shells: [:bash, :zsh])
+      # The native launcher writes its argv[0] in the completion scripts. Running it
+      # through the PATH makes them refer to "cs" rather than to its path in the Cellar.
+      ENV.prepend_path "PATH", bin
+      generate_completions_from_executable("cs", "completions", base_name: "cs", shells: [:bash, :zsh])
     end
   end
 
@@ -45,8 +51,5 @@ class Coursier < Formula
 
     output = shell_output("#{bin}/cs launch io.get-coursier:echo:1.0.2 -- foo")
     assert_equal ["foo\n"], output.lines
-
-    jar_output = shell_output("#{bin}/coursier launch io.get-coursier:echo:1.0.2 -- foo")
-    assert_equal ["foo\n"], jar_output.lines
   end
 end
