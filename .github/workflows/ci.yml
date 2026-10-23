@@ -12,6 +12,10 @@ jobs:
       matrix:
         os: [macos-15, macos-15-intel, macos-26, macos-26-intel]
     runs-on: ${{ matrix.os }}
+    env:
+      # A bare "coursier" is the homebrew-core formula, installed from its bottle,
+      # rather than the one of this repository
+      FORMULA: coursier/formulas/coursier
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,5 +23,13 @@ jobs:
 
       - run: |
           brew tap coursier/formulas .
-          brew install coursier
-          brew test coursier
+          brew install "$FORMULA"
+          brew test "$FORMULA"
+
+      - name: Check the installed version
+        run: |
+          set -euo pipefail
+          expected="$(brew info --json=v2 "$FORMULA" | jq -r '.formulae[0].versions.stable')"
+          actual="$(cs version)"
+          echo "Formula version: $expected, cs version: $actual"
+          test "$actual" = "$expected"

@@ -37,6 +37,7 @@ class Coursier < Formula
     end
     resource("jar-launcher").stage { bin.install "coursier" }
     chmod 0555, bin/"coursier"
+    chmod 0555, bin/"cs"
 
     unless build.without? "shell-completions"
       # The native launcher writes its argv[0] in the completion scripts. Running it
@@ -48,6 +49,7 @@ class Coursier < Formula
 
   test do
     ENV["COURSIER_CACHE"] = "#{testpath}/cache"
+    ENV["COURSIER_ARCHIVE_CACHE"] = "#{testpath}/arc"
 
     output = shell_output("#{bin}/cs launch io.get-coursier:echo:1.0.2 -- foo")
     assert_equal ["foo\n"], output.lines
